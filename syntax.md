@@ -50,9 +50,7 @@
 - Multiline Begin Comment: `/**`
 - Multiline End Comment: `*/`
 - Multiline Continue: `* `
-- Multiline Run-on Continue: `/ `
-- Format Multiline Continue: `f* `
-- Format Multiline Run-on Continue: `f/ `
+- Format Multiline Continue: `f * `
 - Hole: `_`
 - Whitespace: any string of non-line-breaking whitespace
 - Line Break: any string of line breaks
