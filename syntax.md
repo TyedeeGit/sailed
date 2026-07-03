@@ -39,10 +39,12 @@
 - Semicolon: `;`
 - Object String Begin Quote: `o"`
 - Format String Begin Quote: `f"`
+- Object Format String Begin Quote: `of"`
 - String Quote: `"`
 - Multiline Begin Quote: `m"**`
 - Format Multiline Begin Quote: `fm"**`
 - Object Multiline Begin Quote: `om"**`
+- Object Format Multiline Begin Quote: `ofm"**`
 - Multiline End Quote: `*"`
 - Multiline Begin Comment: `/**`
 - Multiline End Comment: `*/`
