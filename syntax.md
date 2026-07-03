@@ -1,0 +1,54 @@
+# Tokens
+- Keywords:
+  - `requires`
+  - `declares`
+  - `implements`
+  - `export`
+  - `incomplete`
+  - `complete`
+  - `namespace`
+  - `branch`
+  - `type`
+  - `as`
+  - `alias`
+  - `with`
+  - `exit`
+  - `send`
+  - `recv`
+  - `to`
+  - `from`
+  - `where`
+  - `in`
+- Scope Delimiter: `::`
+- Type Delimiter: `:`
+- Definition Op: `:=`
+- Comma: `,`
+- Bar: `|`
+- Share: `&`
+- Borrow: `!`
+- Indirect: `^`
+- Tick: `'`
+- Deref Op: `@`
+- Function Type Op: `->`
+- Open Paren: `(`
+- Close Paren: `)`
+- Open Bracket: `[`
+- Close Bracket: `]`
+- Open Brace: `{`
+- Close Brace: `}`
+- Semicolon: `;`
+- Object String Begin Quote: `o"`
+- Format String Begin Quote: `f"`
+- String Quote: `"`
+- Multiline Begin Quote: `m"**`
+- Format Multiline Begin Quote: `fm"**`
+- Object Multiline Begin Quote: `om"**`
+- Multiline End Quote: `*"`
+- Multiline Begin Comment: `/**`
+- Multiline End Comment: `*/`
+- Multiline Continue: `* `
+- Hole: `_`
+- Whitespace: any string of non-line-breaking whitespace
+- Line Break: any string of line breaks
+- Identifier: string of lowercase, digits, and underscores, not starting with a digit, not being a single underscore, and not being a keyword.
+- Number Literal: string of digits
