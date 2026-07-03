@@ -42,14 +42,17 @@
 - Object Format String Begin Quote: `of"`
 - String Quote: `"`
 - Multiline Begin Quote: `m"**`
-- Format Multiline Begin Quote: `fm"**`
+- Format Multiline Begin Quote: `mf"**`
 - Object Multiline Begin Quote: `om"**`
-- Object Format Multiline Begin Quote: `ofm"**`
+- Object Format Multiline Begin Quote: `omf"**`
 - Multiline End Quote: `*"`
+- Format Multiline End Quote: `f*"`
 - Multiline Begin Comment: `/**`
 - Multiline End Comment: `*/`
 - Multiline Continue: `* `
 - Multiline Run-on Continue: `/ `
+- Format Multiline Continue: `f* `
+- Format Multiline Run-on Continue: `f/ `
 - Hole: `_`
 - Whitespace: any string of non-line-breaking whitespace
 - Line Break: any string of line breaks
