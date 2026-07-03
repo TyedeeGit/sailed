@@ -49,6 +49,7 @@
 - Multiline Begin Comment: `/**`
 - Multiline End Comment: `*/`
 - Multiline Continue: `* `
+- Multiline Run-on Continue: `/ `
 - Hole: `_`
 - Whitespace: any string of non-line-breaking whitespace
 - Line Break: any string of line breaks
