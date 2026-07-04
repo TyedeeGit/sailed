@@ -19,6 +19,9 @@
   - `from`
   - `where`
   - `in`
+  - `using`
+  - `generate`
+  - `unquote`
 - Scope Delimiter: `::`
 - Type Delimiter: `:`
 - Definition Op: `:=`
