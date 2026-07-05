@@ -5,11 +5,9 @@
   - `implements`
   - `export`
   - `incomplete`
-  - `complete`
   - `namespace`
   - `branch`
   - `type`
-  - `as`
   - `alias`
   - `with`
   - `exit`
@@ -18,9 +16,7 @@
   - `to`
   - `from`
   - `where`
-  - `in`
   - `using`
-  - `generate`
   - `unquote`
 - Scope Delimiter: `::`
 - Type Delimiter: `:`
@@ -31,7 +27,7 @@
 - Borrow: `!`
 - Indirect: `^`
 - Tick: `'`
-- Deref Op: `@`
+- Deref Op: `*`
 - Function Type Op: `->`
 - Open Paren: `(`
 - Close Paren: `)`
@@ -44,13 +40,13 @@
 - Format String Begin Quote: `f"`
 - Object Format String Begin Quote: `of"`
 - String Quote: `"`
-- Multiline Begin Quote: `m"**`
-- Format Multiline Begin Quote: `mf"**`
-- Object Multiline Begin Quote: `om"**`
-- Object Format Multiline Begin Quote: `omf"**`
-- Multiline End Quote: `*"`
+- Multiline Begin Quote: `*"`
+- Format Multiline Begin Quote: `f*"`
+- Object Multiline Begin Quote: `o*"`
+- Object Format Multiline Begin Quote: `of*"`
+- Multiline End Quote: `"*`
 - Format Multiline End Quote: `f*"`
-- Multiline Begin Comment: `/**`
+- Multiline Begin Comment: `/*`
 - Multiline End Comment: `*/`
 - Multiline Continue: `* `
 - Format Multiline Continue: `f * `
