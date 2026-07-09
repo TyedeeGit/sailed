@@ -3,6 +3,8 @@
 ---
 
 ## 0. How to read this document
+
+### 0.1. Syntax
 Syntactic constructs will use a regex-like notation, for example:
 ```
 binding ::= (mods: let-modifiers) "let" (denoter: pattern) "=" (denotee: expression)
@@ -21,6 +23,12 @@ So, in the example:
    - `denoter` is "`x`"
    - `denotee` is "`f(y)`"
 
+### 0.2. Type Ascriptions
+A type ascription looks like
+```
+theValue: TheType
+```
+
 ---
 
 ## 1. Design principles
@@ -38,4 +46,143 @@ That is the intended shape, not an accident.
 
 ---
 
-## 2. Semantics
+## 2. Universes
+Every value has a type, but types are also values. 
+So what is the type of a type?
+```
+3: NatSize
+``` 
+`NatSize` is an example of a *small* type, the most common type.
+The type of small types is `universe(0)`, or more commonly known as `type`:
+```
+NatSize: type
+```
+But what is `type`'s type? It is `universe(1)`, or also known as `kind`:
+```
+type: kind
+```
+Of course, `kind`'s type based on this pattern is `universe(2)`, and so on:
+```
+universe(n): universe(n + 1)
+```
+
+## 3. Type connectives
+A type connective is a way of combining simpler types into more complex types.
+For example, `struct`s:
+```
+struct {
+   x: Int32,
+   y: Int32
+}
+```
+
+### 3.0. Types with fields
+Most of these connectives will have field descriptions like
+```
+{
+   a: A,
+   b: B,
+   ...
+}
+```
+If you have an instance of the type `x`, you should be able to access the fields:
+```
+x.a
+```
+However, field access will be limited by the semantics of the type.
+Similarly, you can construct instances with:
+```
+.{
+   a = ...,
+   b = ...,
+   ...
+}
+```
+And again, valid constructions are constrained by the semantics of the type.
+
+Implicit fields are denoted with `#` prefixes:
+```
+#a: A
+```
+These fields need not be assigned, unless the compiler can't determine a suitable 
+value for that field automatically, or a default is provided. You can provide a default:
+```
+#a: A = ...
+```
+You can manually assign these fields(if you want to override the provided default or automatically
+determined value, or there isn't a provided default and the value couldn't be determined 
+automatically), as follows:
+```
+#a = ...
+```
+
+### 3.1. Structs
+A value of a `struct` type is a composite of independent values, available and 
+provided simultaneously.
+You can create a `struct` type by using the `struct` keyword and listing the fields in a `{...}` 
+block:
+```
+struct {
+   // fields
+}
+```
+Now, `struct`s are special in that you can have dependent field types. For example:
+```
+struct {
+   i: NatSize,
+   iBelowN: i < n
+}
+```
+Notice how the second field's type refers to the value of the first field. We say that this is
+a *dependent `struct` type*.
+
+To make an instance, you must assign to each required field with independent values available 
+simultaneously:
+```
+.{
+   x = 3,
+   y = -4
+}
+```
+You can then access the fields simultaneously:
+```
+let distSq = square(point.x) + square(point.y);
+```
+
+### 3.2. Variants
+A value of a `variant` type is chosen from the various fields. Similarly to `struct`s, you
+use the `variant` keyword and list the fields to make a `variant` type:
+```
+variant {
+   numberMsg: Int32,
+   writtenMsg: &'Str
+}
+```
+To make an instance, simply assign to one field:
+```
+.{
+   numberMsg = 5
+}
+```
+If the field is implicit, just put the field name:
+```
+.{
+   #implicitField
+}
+```
+You can then access the fields, but you must handle each in choosable branches:
+```
+match
+| let n = msg.numberMsg => io.println("Recieved number: " + n.toString())
+| let s = msg.writtenMsg => io.println("Recieved text: " + s)
+```
+
+### 3.3. Choices
+A value of a `choice` type is an offering between the various fields.
+```
+choice {
+   fst: () -> () accesses(a'mut),
+   snd: () -> () accesses(a'mut)
+}
+```
+To make an instance, assign to each field. Unlike `struct`s, 
