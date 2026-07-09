@@ -217,7 +217,7 @@ choices.fst();
 A value of a `couple` is a composite of interacting fields available simultaneously.
 ```
 couple {
-   consumer: T -> Consumed,
+   consumer: T -> Consume moves,
    producer: T
 }
 ```
@@ -240,3 +240,15 @@ bar(pair.producer);
 ```
 
 `couple`s are dual to `struct`s.
+
+### 3.5. Trivial types
+```
+let Unit = struct {};
+let Never = variant {};
+let Trash = choice {};
+let Consume = couple {};
+```
+
+---
+
+# 4. Function types
