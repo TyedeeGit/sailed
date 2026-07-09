@@ -66,6 +66,8 @@ Of course, `kind`'s type based on this pattern is `universe(2)`, and so on:
 universe(n): universe(n + 1)
 ```
 
+---
+
 ## 3. Type connectives
 A type connective is a way of combining simpler types into more complex types.
 For example, `struct`s:
@@ -149,6 +151,8 @@ You can then access the fields simultaneously:
 let distSq = square(point.x) + square(point.y);
 ```
 
+`struct`s are dual to `couple`s.
+
 ### 3.2. Variants
 A value of a `variant` type is chosen from the various fields. Similarly to `struct`s, you
 use the `variant` keyword and list the fields to make a `variant` type:
@@ -177,12 +181,62 @@ match
 | let s = msg.writtenMsg => io.println("Recieved text: " + s)
 ```
 
+`variant`s are dual to `choice`s.
+
 ### 3.3. Choices
 A value of a `choice` type is an offering between the various fields.
 ```
 choice {
-   fst: () -> () accesses(a'mut),
-   snd: () -> () accesses(a'mut)
+   fst: () -> () moves,
+   snd: () -> () moves
 }
 ```
-To make an instance, assign to each field. Unlike `struct`s, 
+To make an instance, assign to each field. Unlike `struct`s, you can move the same value twice:
+```
+.{
+   fst = () => {
+      val.foo(); // moves `val`
+      io.println("Picked first option!");
+   },
+   snd = () => {
+      val.bar(); // also moves `val`
+      io.println("Picked second option!");
+   }
+}
+```
+You can then access one field, but the other fields become inaccessible upon doing so:
+```
+choices.fst();
+// CAN'T DO:
+// choices.snd();
+```
+
+`choice`s are dual to `variant`s.
+
+### 3.4. Couples
+A value of a `couple` is a composite of interacting fields available simultaneously.
+```
+couple {
+   consumer: T -> Consumed,
+   producer: T
+}
+```
+To make an instance, assign to each field. Unlike `struct`s, data is sent between fields:
+```
+.{
+   consumer = (t) => {
+      to .producer send t;
+      end
+   },
+   producer = from .consumer recv
+}
+```
+You can access the fields, but the way in which you access them must be independent:
+```
+foo(pair.consumer);
+bar(pair.producer);
+// CAN'T DO
+// baz(pair.consumer, pair.producer)
+```
+
+`couple`s are dual to `struct`s.
