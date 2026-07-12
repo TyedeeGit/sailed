@@ -246,4 +246,37 @@ let Consume = couple {};
 
 ---
 
-# 4. Function types
+## 4. Function types
+The basic function type in Flown is:
+```
+T -> U
+```
+Of course, you can have multiple parameters:
+```
+(t0: T0, t1: T1, ...) -> U
+```
+Return-param dependency:
+```
+(t: T) -> U[t]
+```
+Param-param dependency:
+```
+(t0: T0, t1: T1[t0]) -> U[t0, t1]
+```
+Implicit parameters:
+```
+(#implicitParam: T0, #defaultParam: T1 = defaultVal) -> U
+```
+
+### 4.0. Defining a function
+A function is defined by binding the parameters before the `=>`, 
+and using them after the `=>`:
+```
+(t0: T0, t1: T1, ...) => body[t0, t1, ...]
+```
+You can include the return type and any function type modifiers:
+```
+(...) -> U[...] => body[...]
+```
+
+### 4.1. Function type modifiers
