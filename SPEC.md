@@ -33,13 +33,8 @@ theValue: TheType
 
 ## 1. Design principles
 1. **Expressive safety.** You can express essentially any interface using the type
-   system, and the compiler ensures the interface is used safely. Safety is not
-   sacrificed for convenience.
-2. **Theory first.** The language is built around theory, not the other way around.
-   Complexity lives in the type theory, not in ad-hoc syntax or special cases.
-3. **Canonicity.** There is always exactly one best way to do something, and where
-   enforceable, that way is the only way.
-4. **Uniformity.** Analogous things look similar syntactically.
+   system, and the compiler ensures the interface is used safely.
+2. **Theory inspired.** The language is inspired by some existing theory.
 
 Expect demanding semantics and a demanding type system to match. 
 That is the intended shape, not an accident.
