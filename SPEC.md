@@ -280,3 +280,37 @@ You can include the return type and any function type modifiers:
 ```
 
 ### 4.1. Function type modifiers
+Some functions may capture data from their environment.
+Some functions may return through out-pointers.
+Some functions may even unwind the stack.
+These are all represented in the function type as modifiers as follows:
+```
+... -> ... modifier0 modifier1(args, ...) ...
+```
+
+### 4.2. Captures
+A value from the environment captured by sharing is known as a share-capture. A share-capture 
+is denoted with a region and type. All share-captures must be listed as arguments to the
+`holds` modifier:
+```
+holds(sr0'ST0, sr1'ST1, ...)
+```
+Borrow-captures and move-captures are similar:
+```
+holds(..., br0'mut BT0, br1'mut BT1, ...)
+holds(..., T0, T1, ...)
+```
+`any` allows for any captures, inferring which ones must be excluded:
+```
+holds('any)
+holds('mut any)
+holds(any)
+```
+
+### 4.3. Out-pointer functions
+While most functions return through a slot on the stack, this only works when the return
+type has a known size. Otherwise, the function must be declared `outptr`, meaning that it
+returns through an output pointer.
+
+### 4.4. Unwinding functions
+Certain functions unwind the stack. These are declared `unwinds`.
